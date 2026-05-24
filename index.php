@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal Ledger</title>
+    <title>My Ledger</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
             <div class="nav-select-wrapper">
                 <span class="nav-icon">📁</span>
                 <select class="nav-select">
-                    <option>複中個人的私人生活帳 (Ledger #1)</option>
+                    <option>禮中個人的私人生活帳 (Ledger #1)</option>
                 </select>
             </div>
         </div>
