@@ -13,23 +13,12 @@ jobs:
     - name: 🚚 步驟1：取得最新程式碼
       uses: actions/checkout@v4
 
-    - name: 🏗️ 步驟2：動態配置專案資料夾結構與主機自動檢查
-      env:
-        FTP_SERVER: ${{ secrets.FTP_SERVER }}
-        FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-        FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+    - name: 🏗️ 步驟2：動態配置專案資料夾結構
       run: |
         rm -rf deploy_temp
         mkdir -p deploy_temp/htdocs/accounting/
         
         rsync -av --exclude='deploy_temp' --exclude='.git' --exclude='.github' ./accounting/ deploy_temp/htdocs/accounting/
-
-        sudo apt-get update && sudo apt-get install -y lftp
-        lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER" <<EOF
-        set ftp:ssl-allow no
-        mkdir -p htdocs/accounting
-        bye
-        EOF
 
     - name: 📂 步驟3：透過 FTP 安全同步到主機
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -37,6 +26,5 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./deploy_temp/
-        server-dir: ./
-        dangerous-clean-slate: true
+        local-dir: ./deploy_temp/htdocs/
+        server-dir: ./htdocs/
