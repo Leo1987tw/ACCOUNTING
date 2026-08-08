@@ -1,4 +1,4 @@
-name: 🚀 自動外送網頁到免費主機 (終極全自動版)
+name: 🚀 自動外送 accounting 到 accounting
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   web-deploy:
-    name: 🎉 動態結構全自動多專案同步
+    name: 🎉 accounting專屬主機同步
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 步驟1：取得最新程式碼
@@ -17,8 +17,7 @@ jobs:
       run: |
         rm -rf deploy_temp
         mkdir -p deploy_temp/htdocs/accounting/
-        
-        rsync -av --exclude='deploy_temp' --exclude='.git' --exclude='.github' ./accounting/ deploy_temp/htdocs/accounting/
+        rsync -av --exclude='deploy_temp' --exclude='.git' --exclude='.github' ./ deploy_temp/htdocs/accounting/
 
     - name: 📂 步驟3：透過 FTP 安全同步到主機
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
