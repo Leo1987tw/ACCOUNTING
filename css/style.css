@@ -1,0 +1,586 @@
+/* ============================================================================
+   1. 全站基礎重設與 100% Flex 滿版佈局
+   ============================================================================ */
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f6f5; /* 輕盈莫蘭迪灰綠底色 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #333333;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ============================================================================
+   2. 頁首 (15vh) 與 頁尾 (10vh) 完美自適應配對 (內建手機端 RWD 縮減)
+   ============================================================================ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 15vh;
+    padding: 16px 40px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    z-index: 100;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    padding: 16px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #7f8c8d;
+    background-color: #ffffff;
+    border-top: 1px solid #eef2f1;
+}
+
+/* 導覽列按鈕 */
+header .left > a,
+header .right > a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+    height: 42px;
+    margin: 0 6px;
+    background-color: #5c8d78; /* 經典莫蘭迪綠 */
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+header .left > a:hover,
+header .right > a:hover {
+    background-color: #4a7361;
+    box-shadow: 0 4px 12px rgba(92, 141, 120, 0.2);
+}
+
+/* 💡 RWD 行動端優化：當螢幕小於 768px 時，頁首自動縮窄、按鈕等比縮小防止破版 */
+@media (max-width: 767.98px) {
+    header {
+        padding: 10px 16px;
+    }
+    header .left > a,
+    header .right > a {
+        width: 85px;
+        height: 36px;
+        font-size: 0.9rem;
+        margin: 0 3px;
+    }
+}
+
+/* ============================================================================
+   3. 主工作區（滿版彈性拉伸容器）
+   ============================================================================ */
+main {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+@media (max-width: 767.98px) {
+    main {
+        padding: 10px;
+    }
+}
+
+/* ============================================================================
+   4. 獨立身分驗證卡片專用樣式 (Login / Register / Logout 通用外部視覺)
+   ============================================================================ */
+main .auth-card {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+main .auth-card fieldset {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 40px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+main .auth-card fieldset legend {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    display: block;
+}
+
+main .auth-card fieldset > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+main .auth-card fieldset label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333333;
+}
+
+/* 💡 完美對齊截圖：全站登入、註冊輸入框鎖定精美莫蘭迪「淡藍色」底色 */
+main .auth-card fieldset input[type="text"],
+main .auth-card fieldset input[type="password"],
+main .auth-card fieldset input[type="email"] {
+    width: 100%;
+    height: 44px;
+    padding: 10px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #eef2ff; /* 溫潤的淡藍色底色 */
+    color: #333333;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+main .auth-card fieldset input:focus {
+    background-color: #ffffff;
+    border-color: #5c8d78;
+    box-shadow: 0 0 0 3px rgba(92, 141, 120, 0.15);
+}
+
+/* 登出卡片專用文字盒 */
+main .auth-card fieldset > div.logout-text-box {
+    margin-top: 36px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+main .auth-card fieldset > div.logout-text-box h3 { color: #2c3e50; font-weight: 600; }
+main .auth-card fieldset > div.logout-text-box p { color: #7f8c8d; font-size: 0.9rem; margin-top: 8px; }
+
+/* 💡 還原焦點：100% 還原您理想畫面中「✓ 此帳號可以使用」與「✓ 密碼輸入一致」的沉穩黑灰色 */
+main form.container fieldset span.msg-success {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333; 
+    margin-top: 6px;
+}
+
+/* 查重失敗或密碼不相符時呈現的警告紅 */
+main form.container fieldset span.msg-error {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #e74c3c; 
+    margin-top: 6px;
+}
+
+.error-msg {
+    color: #e74c3c;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* 外部按鈕群組橫向並排樣式 */
+main .auth-card fieldset > div.button-group {
+    flex-direction: row;
+    gap: 15px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+main .auth-card fieldset button {
+    flex: 1;
+    height: 44px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* 💡 還原焦點：按鈕條件未達標前，呈現與您理想圖完全對齊的高級霧面防呆灰 */
+main .auth-card fieldset button.btn-disabled {
+    background-color: #94a3b8; 
+    color: #ffffff;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 當即時校驗全數通過時，亮起高質感墨綠色 */
+main .auth-card fieldset button.btn-active {
+    background-color: #5c8d78; 
+    color: #ffffff;
+    opacity: 1;
+    cursor: pointer;
+}
+main .auth-card fieldset button.btn-active:hover {
+    background-color: #4a7361;
+}
+
+/* 警告類型提交鈕 (安全登出鈕) */
+main .auth-card fieldset button.btn-danger {
+    background-color: #e74c3c;
+    color: #ffffff;
+}
+main .auth-card fieldset button.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* 次要切換鈕 (返回登入、返回首頁) */
+main .auth-card fieldset button[type="button"] {
+    background-color: #e2e8f0;
+    color: #4a5568;
+}
+main .auth-card fieldset button[type="button"]:hover {
+    background-color: #cbd5e1;
+}
+
+/* 💡 RWD 行動端卡片優化 */
+@media (max-width: 480px) {
+    main .auth-card fieldset {
+        padding: 25px 20px;
+    }
+}
+
+/* ============================================================================
+   5. 📖 溫馨大氣迎賓大廳專用外部樣式 (main.php 未登入狀態)
+   ============================================================================ */
+.landing-welcome-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-hero-section h1 {
+    font-size: 2.6rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.welcome-hero-section p {
+    font-size: 1.15rem;
+    color: #7f8c8d;
+    max-width: 720px;
+    margin: 0 auto 55px auto;
+    line-height: 1.65;
+}
+
+/* 巨大按鈕網格佈局 */
+.dashboard-buttons-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 100%;
+}
+
+/* 💡 滿分還原：400x150px、2.2rem 氣勢磅礴大按鈕規格 */
+.dashboard-buttons-grid a.huge-dashboard-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 150px;
+    background-color: #5c8d78; /* 經典莫蘭迪綠 */
+    color: #ffffff;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(92, 141, 120, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* 註冊方塊改用柔和的深沉藍灰調 */
+.dashboard-buttons-grid a.huge-dashboard-btn.register-tone { 
+    background-color: #4a6b82; 
+    box-shadow: 0 10px 25px rgba(74, 107, 130, 0.15); 
+}
+
+.dashboard-buttons-grid a.huge-dashboard-btn:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    filter: brightness(0.95);
+}
+
+.dashboard-buttons-grid a.huge-dashboard-btn:active {
+    transform: translateY(-2px);
+}
+
+/* 💡 RWD 迎賓首頁響應式優化：在手機上自動縮小巨大按鈕，防止破版 */
+@media (max-width: 767.98px) {
+    .welcome-hero-section h1 { font-size: 1.8rem; }
+    .welcome-hero-section p { font-size: 1rem; margin-bottom: 30px; }
+    .dashboard-buttons-grid { gap: 20px; }
+    .dashboard-buttons-grid a.huge-dashboard-btn {
+        width: 100%;
+        max-width: 340px;
+        height: 100px;
+        font-size: 1.6rem;
+        border-radius: 12px;
+    }
+}
+
+/* ============================================================================
+   6. 📊 智慧記帳卡片面板專用樣式 (main.php 已登入狀態)
+   ============================================================================ */
+.ledger-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.card-left, .card-right {
+    flex: 1;
+    min-width: 450px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid #eef2f1;
+}
+
+.ledger-container form {
+    display: block;
+    width: 100%;
+}
+
+.ledger-container .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.ledger-container .form-group label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #4a5568;
+}
+
+.ledger-container .form-group input,
+.ledger-container .form-group select {
+    width: 100%;
+    height: 40px;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f8fafc;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.ledger-container .form-group input:focus,
+.ledger-container .form-group select:focus {
+    border-color: #5c8d78;
+    background-color: #ffffff;
+}
+
+.ledger-container .row-group {
+    display: flex;
+    gap: 15px;
+}
+
+.ledger-container .row-group .form-group {
+    flex: 1;
+}
+
+/* 頂部收支統計盒子 */
+.ledger-container .summary-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f8faf9;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 25px;
+}
+
+.ledger-container .summary-title {
+    font-size: 12px; 
+    color: #718096; 
+    font-weight: 600;
+}
+
+.ledger-container .summary-box-income {
+    font-size: 22px;
+    font-weight: bold;
+    color: #3182ce;
+    margin-top: 4px;
+}
+
+.ledger-container .summary-box-expense {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e53e3e;
+    margin-top: 4px;
+}
+
+.ledger-container .form-main-title,
+.ledger-container .panel-main-title {
+    font-size: 18px; 
+    margin-bottom: 25px; 
+    color: #2d3748;
+}
+
+.ledger-container .btn-submit {
+    width: 100%;
+    height: 44px;
+    background-color: #5c8d78;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.ledger-container .btn-submit:hover {
+    background-color: #4a7361;
+}
+
+/* ============================================================================
+   7. 📋 歷史日記簿數據網格表格 (右側滾動網格)
+   ============================================================================ */
+.ledger-container .table-scroll-container {
+    overflow-y: auto; 
+    max-height: 500px; 
+    width: 100%;
+}
+
+.ledger-container .empty-text {
+    color: #a0aec0; 
+    text-align: center; 
+    margin-top: 150px; 
+    font-size: 16px;
+}
+
+.ledger-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ledger-table th, 
+.ledger-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 14px;
+}
+
+.ledger-table th {
+    background-color: #f8faf9;
+    color: #4a5568;
+    font-weight: 600;
+}
+
+/* 表格欄位比例細緻控管 */
+.ledger-table th.col-date, .ledger-table td.cell-date { width: 20%; color: #718096; font-size: 13px; }
+.ledger-table th.col-account, .ledger-table td.cell-account { width: 30%; }
+.ledger-table th.col-desc, .ledger-table td.cell-desc { width: 35%; }
+.ledger-table th.col-amount, .ledger-table td.cell-amount { width: 15%; text-align: right; }
+
+.ledger-table td .account-name {
+    font-weight: 600; 
+    color: #2d3748;
+    display: block;
+}
+
+/* 莫蘭迪綠收支分類小標籤 */
+.ledger-table td .category-badge {
+    background: #e6fffa; 
+    color: #234e52; 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    display: inline-block; 
+    margin-top: 4px; 
+    font-size: 11px;
+}
+
+.ledger-table td .desc-text {
+    color: #4a5568; 
+    font-size: 13px;
+    display: block;
+}
+
+.ledger-table td .partner-text {
+    color: #a0aec0; 
+    font-size: 11px;
+    display: block;
+    margin-top: 2px;
+}
+
+.ledger-table td.cell-amount {
+    font-weight: 700; 
+    color: #e53e3e; 
+    font-size: 14px;
+}
+
+/* ============================================================================
+   8. 📱 終極 RWD 響應式中斷點 (精準控制記帳雙欄在行動裝置自動攤平)
+   ============================================================================ */
+@media (max-width: 1024px) {
+    /* 當平板或螢幕不夠寬時，彈性拉開防線 */
+    .ledger-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+    .card-left, .card-right {
+        width: 100%;
+        max-width: 700px;
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 手機極小螢幕細緻微調 */
+    .card-left, .card-right {
+        padding: 20px 15px;
+    }
+    .ledger-container .row-group {
+        flex-direction: column;
+        gap: 0px;
+    }
+    .ledger-table th, .ledger-table td {
+        padding: 8px 4px;
+        font-size: 12px;
+    }
+}
