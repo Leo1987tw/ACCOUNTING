@@ -10,7 +10,7 @@ include_once "./api/db.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商業會計日記簿管理系統</title>
+    <title>會計帳簿管理系統</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/script.js" defer></script>
 </head>
